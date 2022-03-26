@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS results (
+    pk INT PRIMARY KEY AUTO_INCREMENT,
+    lotto_nums INT(10) NOT NULL,
+    prizes VARCHAR(10) NOT NULL
+);
