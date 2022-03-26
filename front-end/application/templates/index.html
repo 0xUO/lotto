@@ -1,0 +1,12 @@
+<html>
+    <head>
+        <title>Lotto</title>
+    </head>
+    <body style="background-color: goldenrod; font-family: Calibri;">
+        <h1>Lotto</h1>
+        {% for result in results %}
+        {{ result.__str__() }}
+        <br>
+        {% endfor %}
+    </body>
+</html>
