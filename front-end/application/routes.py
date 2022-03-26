@@ -5,7 +5,10 @@ import requests
 
 @app.route('/')
 def index():
-    pass
+    lottoDraw = requests.get('http://lotto-api:5000/get-draw')
+    prizes = requests.post('http://prizes-api:5000/prizes', json=lottoDraw.json())
+    db.session.add(Results(lottoDraw.json()["lotto"], prize.json()["prizes"]))
+    db.session.commit()
+    results = Results.query.all()
 
-
-    return
+    return render_template('index.html', results = results)

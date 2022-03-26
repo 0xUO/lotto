@@ -2,7 +2,7 @@ from application import db
 
 class Results(db.Model):
     pk = db.Column(db.Integer, primary_key = True)
-    lotto_nums = db.Column(db.String(10))
+    lottoDraw = db.Column(db.String(10))
     prizes = db.Column(db.String(10))
     def __str__(self):
-        return f"{self.lotto_numbers} With a Bonus of {self.prizes} !!!"
+        return f"{self.lottoDraw} With a Bonus of {self.prizes} !!!"

@@ -1,6 +1,8 @@
 from application import app
 from flask import jsonify
-from random import choice
+import random
 
-lotto_nums = []
-
+@app.route('/get-draw', methods=['GET'])
+def lottoDraw():
+    lottoDraw = random.sample(range(1, 45), 5)
+        return jsonify(lottoDraw=lottoDraw)
