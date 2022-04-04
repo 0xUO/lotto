@@ -8,11 +8,11 @@
   - name: create git dir
     file:
       state: directory
-      path: /home/travz/lotto
+      path: /home/uche/lotto
   - name: clone repo
     git:
       repo: https://github.com/0xUO/lotto
-      dest: /home/travz/lotto
+      dest: /home/uche/lotto
       clone: yes
   vars:
     docker_user: uche
