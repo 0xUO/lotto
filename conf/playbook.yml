@@ -11,7 +11,7 @@
       path: /home/travz/lotto
   - name: clone repo
     git:
-      repo: https://github.com/0xuche/lotto
+      repo: https://github.com/0xUO/lotto
       dest: /home/travz/lotto
       clone: yes
   vars:
