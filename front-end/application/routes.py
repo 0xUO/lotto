@@ -6,8 +6,9 @@ import requests
 @app.route('/')
 def index():
     lottoDraw = requests.get('http://lotto-api:5000/get-draw')
-    prizes = requests.post('http://prize-api:5000/prize', json=lottoDraw.json())
-    db.session.add(Results(lottoDraw.json()["lotto"], prize.json()["prize"]))
+    lottoDraw2 = requests.get('http://lotto-api:5000/get-draw2')
+    prizes = requests.get('http://prize-api:5000/prize', json=lottoDraw.json(), json=lottoDraw2.json())
+    db.session.add(Results(lottoDraw.json()["lotto"],lottoDraw2.json()["lotto"], prize.json()["prize"]))
     db.session.commit()
     results = Results.query.all()
 
