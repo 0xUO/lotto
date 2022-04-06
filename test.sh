@@ -4,3 +4,10 @@ python3 -m venv venv
 source venv/bin/activate
 pip3 install -r test_requirements.txt
 python3 -m pytest --cov=application --cov-report=html
+
+declare -a services=(front-end lotto-api prize-api)
+for dir in "${services[@]}"; do
+cd ${dir}
+python3 -m pytest -p no:warnings --cov=application --cov-report=html
+cd ..
+done

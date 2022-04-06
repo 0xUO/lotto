@@ -2,16 +2,10 @@ from application import app
 from flask import request, jsonify
 from random import choice
 
-prizes = ['£50', '£70', '£100']
+prizes = dict(1 = '£100', 2 = '£200', 3 = '£300', 4 = '£400', 5 = '£500')
 
-@app.route('/prize', methods=['GET'])
+@app.route('/prize', methods=['POST'])
 def prize():
-    prize = choice(prizes)
-    return jsonify(prize=prize)
-
-def prize():
-    if lottoDraw + lottoDraw2 > 60:
-        prize == '£50'
-    else:
-        prize == '£100'
-    return jsonift(prize=prize)
+    draw_json = request.get_json()
+    draw = draw_json["lotto"]
+    return jsonify(prize=prizes[draw])
