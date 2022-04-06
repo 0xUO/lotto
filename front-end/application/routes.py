@@ -5,10 +5,10 @@ import requests
 
 @app.route('/')
 def index():
-    magicNumber = requests.get('http://lotto-api:5000/get-magicnum')
+    magicNumber = requests.get('http://lotto-api:5000/get-magicNumber')
     lottoDraw = requests.get('http://lottodraw-api:5000/get-draw')
-    prizes = requests.post('http://prize-api:5000/prize', json=magicNumber.json())
-    db.session.add(Results(magicNumber.json()["lotto"], lottoDraw.json()["lottodraw"],prize.json()["prize"]))
+    prize = requests.post('http://prize-api:5000/prize', json=magicNumber.json())
+    db.session.add(Results(magicNumber=magicNumber.json()["magicNumber"], lottoDraw=lottoDraw.json()["lottoDraw"], prize=prize.json()["prize"]))
     db.session.commit()
     results = Results.query.all()
 

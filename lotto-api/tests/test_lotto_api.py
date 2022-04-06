@@ -9,20 +9,32 @@ class TestBase(TestCase):
         return app
 
 class TestView(TestBase):
-    @patch('application.routes.choice', return_value='cat')
-    def test_get_animal_cat(self, mock_func):
-        response = self.client.get(url_for('get_animal'))
+    @patch('application.routes.choice', return_value='one')
+    def test_get_magicNum_1(self, mock_func):
+        response = self.client.get(url_for('magicNumber'))
         self.assert200(response)
-        self.assertIn(b'cat', response.data)
+        self.assertIn(b'one', response.data)
 
-    @patch('application.routes.choice', return_value='dog')
-    def test_get_animal_dog(self, mock_func):
-        response = self.client.get(url_for('get_animal'))
+    @patch('application.routes.choice', return_value='two')
+    def test_get_magicNum_2(self, mock_func):
+        response = self.client.get(url_for('magicNumber'))
         self.assert200(response)
-        self.assertIn(b'dog', response.data)
+        self.assertIn(b'two', response.data)
 
-    @patch('application.routes.choice', return_value='cow')
-    def test_get_animal_cow(self, mock_func):
-        response = self.client.get(url_for('get_animal'))
+    @patch('application.routes.choice', return_value='three')
+    def test_get_magicNum_3(self, mock_func):
+        response = self.client.get(url_for('magicNumber'))
         self.assert200(response)
-        self.assertIn(b'cow', response.data)
+        self.assertIn(b'three', response.data)
+
+    @patch('application.routes.choice', return_value='four')
+    def test_get_magicNum_4(self, mock_func):
+        response = self.client.get(url_for('magicNumber'))
+        self.assert200(response)
+        self.assertIn(b'four', response.data)
+
+    @patch('application.routes.choice', return_value='five')
+    def test_get_magicNum_5(self, mock_func):
+        response = self.client.get(url_for('magicNumber'))
+        self.assert200(response)
+        self.assertIn(b'five', response.data)
