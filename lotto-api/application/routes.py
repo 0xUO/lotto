@@ -2,9 +2,9 @@ from application import app
 from flask import jsonify
 from random import choice
 
-lottoGen = ['1', '2', '3', '4', '5']
+magicNumbers = ['one', 'two', 'three', 'four', 'five']
 
-@app.route('/get-magicnum', methods=['GET'])
+@app.route('/get-magicNumber', methods=['GET'])
 def magicNumber():
-    magicNum = choice(lottoGen)
-    return jsonify(magicNum=magicNum)
+    magicNumber = choice(magicNumbers)
+    return jsonify(magicNumber=magicNumber)
