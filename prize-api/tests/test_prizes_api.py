@@ -7,7 +7,27 @@ class TestBase(TestCase):
         return app
 
 class TestView(TestBase):
-    def test_get_noise_cat(self):
-        response = self.client.post(url_for('noise'), json={'animal':'cat'})
+    def test_get_prize_1(self):
+        response = self.client.post(url_for('prize'), json={'magicNumber':'one'})
         self.assert200(response)
-        self.assertIn(b'meow', response.data)
+        self.assertIn(b'100', response.data)
+
+    def test_get_prize_1(self):
+        response = self.client.post(url_for('prize'), json={'magicNumber':'two'})
+        self.assert200(response)
+        self.assertIn(b'200', response.data)
+
+    def test_get_prize_1(self):
+        response = self.client.post(url_for('prize'), json={'magicNumber':'three'})
+        self.assert200(response)
+        self.assertIn(b'300', response.data)
+
+    def test_get_prize_1(self):
+        response = self.client.post(url_for('prize'), json={'magicNumber':'four'})
+        self.assert200(response)
+        self.assertIn(b'400', response.data)
+
+    def test_get_prize_1(self):
+        response = self.client.post(url_for('prize'), json={'magicNumber':'five'})
+        self.assert200(response)
+        self.assertIn(b'500', response.data)
