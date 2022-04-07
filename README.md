@@ -1,6 +1,6 @@
-#Lotto
+# Lotto
 
-Project Brief :
+# Project Brief :
 
 The brief for the project was to produce an application which consists of four microservices and interacts with one another to generate objects using some logic. A fully automated CI/CD pipeline was used to produce and maintain the application. The full stack required was:
 
@@ -13,15 +13,15 @@ The brief for the project was to produce an application which consists of four m
 - Docker Swarm : Container Orchestration
 - NGINX : Reverse Proxy 
 
-Planning Project :
+# Planning Project :
 
 When planning the project, a full risk assessment was undertaken in order to identify hazards associated with the project, this is shown below:
 
-![Risk Assessment](filenamehere)
+![Risk Assessment](figures/RiskAssessment.png)
 
 As users are not submitting data to the app, the primary focus of the risk assessment was on operational risks, meaning risks associated with building and deploying the app. As shown in the risk assessment, the impact of probability of each risk was stated in order to guide development.
 
-App Design :
+# App Design :
 
 As a response to the brief, it was decided to develop a lottery system. This uses the microservice architecture as follows:
 
@@ -36,18 +36,18 @@ As a response to the brief, it was decided to develop a lottery system. This use
 In addition to the main services, a reverse proxy using NGINX was included. The NGINX service listen on port 80 on the host machine and performs a proxy pass, directung trffic from port 80 ton host machine to port 5000 on the front-end container.
 Below shows the front-end of the applicatoin in action. 
 
-![Live App](LottoLive.png)
+![Live App](figures/LottoLive.png)
 
 
 Each record and future record for the app is/will be saved to a MySQL Database. An entiry diagram is shown below.
 
-![ED Model](ed.jpg)
+![ED Model](figures/ed.jpg)
 
 The overall microservice architecture is displayed below. 
 
-![Microservice Architecture](MicroserviceArchitecture.jpg)
+![Microservice Architecture](figures/MicroserviceArchitecture.jpg)
 
-CI/CD Pipeline :
+# CI/CD Pipeline :
 
 This projeyc uses a full CI/CD pipeline to test, build, deplou and maintain the application. The major components of this pipeline are:
 
@@ -57,23 +57,23 @@ This projeyc uses a full CI/CD pipeline to test, build, deplou and maintain the 
 - CI Server
 - Depoloyment Environment
 
-Trello: Project Trcking
+# Trello: Project Trcking
 
 Project tracking was done using trello. Tasks were ussigned story point, acceptance criteria and MOSCoW prioritsation and moved through the stages from project backlog to complete as the project progressed. 
 
-![Trello Board Here](filenamehere)
+![Trello Board](figures/TrelloBoard/png)
 
-Trello Board: https://trello.com/b/
+Trello Board: https://trello.com/b/DyKHpPzZ/lotto
 
 
-Git: Version Control:
+# Git: Version Control:
 
 Git was used for the version control of the project, the repository was hosted on github. Version Control with git allows changes to be make and commited to the project with access of commit history to access earlier versions. Using github provided webhooks which sends http POST requests to a build server to automate building and testing on Jenkins. Functions were created and updated via different branches then merged into dev then into main. Below is a network graph of how this flowed.
 The development environment used was a Ubuntu virtual machine, hosted on GCP, accessed via VSCode.
 
-![Network Graph](GitControl.png)
+![Network Graph](figures/GitControl.png)
 
-Testing :
+# Testing :
 
 Testing the application is always an essential portion of the development process. Pytest was used for Unit testing the functions/functionality of the app. Unit tests were written to ensure the functions worked correctly.
 
@@ -91,29 +91,29 @@ Tests were automated through Jenkins using webhooks. A Coverage report shows wha
 
 ![Test Cov Here](filenamehere)
 
-Jenkins: Build Server:
+# Jenkins: Build Server:
 
 Jenkins was used as a build server, this provided automation of building and testing. Jenkins cloned down the repo and executed the pipeline script defined in the Jenkinsfile. This pipeline consists of 4 main stages: test, build/push,deploy and post-build actions. The test stage executes a bash script which cycles through the directories for the four services and runs unit tests using pytest. The front-end and all APIs had unit tests written to test all areas of functionality. To test the HTTP requests made by the front-end, requests_mock was used to simulate responses from the APIs. To test the functionality of the APIs themselves, the random.choice function was patched with unittest.mock to ensure reproducible test performance. 
 
 Below is a display of the stages on jenkins that show the test, build and deploy states of the app.
 
-![Jenkins Pipeline](JenkinsPipeline.png)
+![Jenkins Pipeline](figures/JenkinsPipeline.png)
 
 
 Following the build and push, the deploy stage deploys the application. First the docker-compose.yaml and nginx.conf files are copied to the manager node by secure copy (scp). Then, an ansible playbook is used to run three roles: the first installs docker on the swarm machines if it is not present already and adds jenkins to the docker group, the second initialises a swarm on the manager node and uses the Ansible docker stack module to deploy the application, and the third adds the worker node to the swarm. This creates an overlay network as follows:
 
-![Network Overlay](overlaynetwork.jpg)
+![Network Overlay](figures/overlaynetwork.jpg)
 
 The overall Structure of the CI/CD Pipeline is displayed below: 
 
-![Pipeline Structure](PipelineStructure.jpg)
+![Pipeline Structure](figures/PipelineStructure.jpg)
 
-Future  Improvements:
+# Future  Improvements:
 
 Firstly i would like to change some files aroudn and file names and there were some confusion in the development stage due to file names and other related issues, such as the magic Number service being names lotto and the lotto being named lottoDraw, this could be named alot more clearly and avoid a lot of confusion moving forward.
 
 Secondly the app could be improved by using another NGINX service as an external load balancer for single point of entry to the application.
 
-Updates : 
+# Updates : 
 
 - Change colour scheme
