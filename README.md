@@ -96,7 +96,6 @@ Below is a display of the stages on jenkins that show the test, build and deploy
 
 ![Jenkins Pipeline](figures/JenkinsPipeline.png)
 
-
 Following the build and push, the deploy stage deploys the application. First the docker-compose.yaml and nginx.conf files are copied to the manager node by secure copy (scp). Then, an ansible playbook is used to run three roles: the first installs docker on the swarm machines if it is not present already and adds jenkins to the docker group, the second initialises a swarm on the manager node and uses the Ansible docker stack module to deploy the application, and the third adds the worker node to the swarm. This creates an overlay network as follows:
 
 ![Network Overlay](figures/overlaynetwork.jpg)
