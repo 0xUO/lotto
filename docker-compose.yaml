@@ -30,7 +30,7 @@ services:
       - "lotto-net"
       lottodraw-api:
     image: uchechi/lotto-lottodraw:latest
-    build: ./lotto-api
+    build: ./lottodraw-api
     networks:
       - "lotto-net"
   prize-api:
