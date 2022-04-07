@@ -10,7 +10,12 @@ class TestBase(TestCase):
     def create_app(self):
         return app
 
-    @patch('application.routes.sample', return_value=[2,43,23,21,34])
-    def test_lottoDraw(self, mock_func):
-        response = self.client.get(url_for('lottoDraw'))
-        self.assert200(response)
+class TestView(TestBase):
+    def test_lottoDraw(self):
+        with patch('random.sample') as r:
+            r.return_value = '2,43,23,21,34'
+            response = self.client.get(url_for('lottoDraw'))
+            self.assert200(response)
+            self.assertIn(b'2,43,23,21,34', response.data)
+
+
