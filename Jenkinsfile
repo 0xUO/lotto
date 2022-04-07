@@ -17,7 +17,7 @@ pipeline {
                 sh "/bin/bash -c 'docker rmi -f \$(docker images -q)'"  
             }
         }
-        stage('deploy swarm') {
+        stage('deploy stack') {
             steps {
                 sh "echo '    driver: overlay' >> docker-compose.yaml"
                 sh "scp ./docker-compose.yaml jenkins@swarm-manager:/home/jenkins/docker-compose.yaml"
