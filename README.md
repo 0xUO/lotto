@@ -36,16 +36,16 @@ As a response to the brief, it was decided to develop a lottery system. This use
 In addition to the main services, a reverse proxy using NGINX was included. The NGINX service listen on port 80 on the host machine and performs a proxy pass, directung trffic from port 80 ton host machine to port 5000 on the front-end container.
 Below shows the front-end of the applicatoin in action. 
 
-![Live App](LottoLive)
+![Live App](LottoLive.png)
 
 
 Each record and future record for the app is/will be saved to a MySQL Database. An entiry diagram is shown below.
 
-![ED Model](ed)
+![ED Model](ed.jpg)
 
 The overall microservice architecture is displayed below. 
 
-![Microservice Architecture](MicroserviceArchitecture)
+![Microservice Architecture](MicroserviceArchitecture.jpg)
 
 CI/CD Pipeline :
 
@@ -71,7 +71,7 @@ Git: Version Control:
 Git was used for the version control of the project, the repository was hosted on github. Version Control with git allows changes to be make and commited to the project with access of commit history to access earlier versions. Using github provided webhooks which sends http POST requests to a build server to automate building and testing on Jenkins. Functions were created and updated via different branches then merged into dev then into main. Below is a network graph of how this flowed.
 The development environment used was a Ubuntu virtual machine, hosted on GCP, accessed via VSCode.
 
-![Network Graph](GitControl)
+![Network Graph](GitControl.png)
 
 Testing :
 
@@ -97,16 +97,16 @@ Jenkins was used as a build server, this provided automation of building and tes
 
 Below is a display of the stages on jenkins that show the test, build and deploy states of the app.
 
-![Jenkins Pipeline](JenkinsPipeline)
+![Jenkins Pipeline](JenkinsPipeline.png)
 
 
 Following the build and push, the deploy stage deploys the application. First the docker-compose.yaml and nginx.conf files are copied to the manager node by secure copy (scp). Then, an ansible playbook is used to run three roles: the first installs docker on the swarm machines if it is not present already and adds jenkins to the docker group, the second initialises a swarm on the manager node and uses the Ansible docker stack module to deploy the application, and the third adds the worker node to the swarm. This creates an overlay network as follows:
 
-[overlay network here]
+![Network Overlay](overlaynetwork.jpg)
 
 The overall Structure of the CI/CD Pipeline is displayed below: 
 
-![Pipeline Structure](PipelineStructure)
+![Pipeline Structure](PipelineStructure.jpg)
 
 Future  Improvements:
 
