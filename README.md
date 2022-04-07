@@ -15,31 +15,30 @@ The brief for the project was to produce an application which consists of four m
 
 # Planning Project :
 
-When planning the project, a full risk assessment was undertaken in order to identify hazards associated with the project, this is shown below:
+When planning the project, a full risk assessment was undertaken in order to identify hazards associated with the project.
+
+As users are not submitting data to the app, the primary focus of the risk assessment was on operational risks, meaning risks associated with building and deploying the app. As shown in the risk assessment, the hazard, risk, impact, probability, likelyhood, response and control measures of each risk was stated in order to guide development.
 
 ![Risk Assessment](figures/RiskAssessment.png)
-
-As users are not submitting data to the app, the primary focus of the risk assessment was on operational risks, meaning risks associated with building and deploying the app. As shown in the risk assessment, the impact of probability of each risk was stated in order to guide development.
 
 # App Design :
 
 As a response to the brief, it was decided to develop a lottery system. This uses the microservice architecture as follows:
 
-- Front-end : Service 1: The service in which the user interacts with. This service sends requests to the other services to generate random events, displays the generated events to the user as well as storing them in a database.
+- Front-end : Service 1: The service in which the user interacts with. This service sends requests to the other services to generate random lottery draws, displays the generated draws to the user as well as storing them in a database.
 
 - Lotto-api : Service 2: This service receives HTTP GET requets from service 1 and responds with a randomly selected magic number chosen from a list of magic numbers using random.choice()
 
 - LottoDraw-api : Service 3: This service receives HHTP GET requests from service 1 then responds with a randomly generated set of 5 lottery numbers using random.sample()
 
-- Prize-api : Service 4: This service receives HTTP POST requests from service l, which determines a the prize given based on the magic Number that was drawn in service 2 as it is linked with a dictionary to what the prize will be. 
+- Prize-api : Service 4: This service receives HTTP POST requests from service 2, which determines the the prize given based on the magic Number that was drawn. It is linked with a dictionary to what prize will be given. 
 
-In addition to the main services, a reverse proxy using NGINX was included. The NGINX service listen on port 80 on the host machine and performs a proxy pass, directung trffic from port 80 ton host machine to port 5000 on the front-end container.
-Below shows the front-end of the applicatoin in action. 
+In addition to the main services, a reverse proxy using NGINX was included. The NGINX service listen on port 80 on the host machine and performs a proxy pass, directing traffic from port 80 on host machibe to port 5000 on the front-end container.
+Below shows the front-end of the application in action. 
 
 ![Live App](figures/LottoLive.png)
 
-
-Each record and future record for the app is/will be saved to a MySQL Database. An entiry diagram is shown below.
+Each record for the app is saved to a MySQL Database. An entity diagram is shown below.
 
 ![ED Model](figures/ed.jpg)
 
@@ -49,27 +48,25 @@ The overall microservice architecture is displayed below.
 
 # CI/CD Pipeline :
 
-This projeyc uses a full CI/CD pipeline to test, build, deplou and maintain the application. The major components of this pipeline are:
+This project uses a full CI/CD pipeline to test, build, deploy and maintain the application. The major components of this pipeline are:
 
 - Project Tracking
 - Version Control 
 - Development Environment
 - CI Server
-- Depoloyment Environment
+- Deployment Environment
 
-# Trello: Project Trcking
+# Trello: Project Tracking
 
-Project tracking was done using trello. Tasks were ussigned story point, acceptance criteria and MOSCoW prioritsation and moved through the stages from project backlog to complete as the project progressed. 
+I used Trello to track my project by creating a tracking board. Story points were assigned and MoSCoW prioritisation was used to review and complete functions as the project progressed.Below is the trello board  along with a link to view the board.
 
-![Trello Board](figures/TrelloBoard/png)
+![Trello Board](figures/TrelloBoard.png)
 
 Trello Board: https://trello.com/b/DyKHpPzZ/lotto
 
-
 # Git: Version Control:
 
-Git was used for the version control of the project, the repository was hosted on github. Version Control with git allows changes to be make and commited to the project with access of commit history to access earlier versions. Using github provided webhooks which sends http POST requests to a build server to automate building and testing on Jenkins. Functions were created and updated via different branches then merged into dev then into main. Below is a network graph of how this flowed.
-The development environment used was a Ubuntu virtual machine, hosted on GCP, accessed via VSCode.
+Git was used for the version control of the project, the repository was hosted on github. Version Control with git allows changes to be make and commited to the project with access of commit history to access earlier versions. Using github provided webhooks which sends http POST requests to a build server to automate building and testing on Jenkins. Functions were created and updated via feature branches then merged into dev then into main. Below is a network graph of how this flowed.
 
 ![Network Graph](figures/GitControl.png)
 
@@ -98,7 +95,6 @@ Jenkins was used as a build server, this provided automation of building and tes
 Below is a display of the stages on jenkins that show the test, build and deploy states of the app.
 
 ![Jenkins Pipeline](figures/JenkinsPipeline.png)
-
 
 Following the build and push, the deploy stage deploys the application. First the docker-compose.yaml and nginx.conf files are copied to the manager node by secure copy (scp). Then, an ansible playbook is used to run three roles: the first installs docker on the swarm machines if it is not present already and adds jenkins to the docker group, the second initialises a swarm on the manager node and uses the Ansible docker stack module to deploy the application, and the third adds the worker node to the swarm. This creates an overlay network as follows:
 
