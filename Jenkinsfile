@@ -2,7 +2,8 @@ pipeline {
     agent any
     stages {
         stage('test') {
-            steps {               
+            steps {     
+                    sh "docker system prune"          
                     sh "bash test.sh"
             }
         }
