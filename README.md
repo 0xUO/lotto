@@ -84,15 +84,17 @@ Tests were automated through Jenkins using webhooks. A Coverage report shows wha
 ![Test Coverage Report](figures/lottoDrawCR.png)
 ![Test Coverage Report](figures/prizeCR.png)
 
-Jenkins was used as a build server, this provided automation of building and testing. Jenkins cloned the repo and executed the pipeline script defined in the Jenkinsfile. This pipeline consists of 4 main stages: test, build/push,deploy and post-build actions. The test stage executes a bash script which cycles through the directories for the four services and runs unit tests using pytest. The front-end and all APIs had unit tests written to test all areas of functionality. To test the HTTP requests made by the front-end, requests_mock was used to simulate responses from the APIs. To test the functionality of the APIs themselves, the random.choice function was patched with unittest.mock to ensure reproducible test performance. 
+Jenkins was used as a build server, this provided automation of building and testing. Jenkins cloned the repo and executed the pipeline script defined in the Jenkinsfile. This pipeline consists of 4 main stages: test, build/push,deploy and post-build actions. The test stage executes a bash script which cycles through the directories for the four services and runs unit tests using pytest. The front-end and all APIs had unit tests written to test all areas of functionality. To test the HTTP requests made by the front-end, requests_mock was used to simulate responses from the APIs. To test the functionality of the APIs themselves, the random.choice and random.sample function was patched with unittest.mock to ensure reproducible test performance. 
 
 Below is a display of the stages on jenkins that show the test, build and deploy states of the app.
+
+It shows the four different stages of the jenkinsfile in seperate blocks, if a stage fails it would come up as red, if successful then green and you would be able to locate any problems.
 
 ![Jenkins Pipeline](figures/JenkinsPipeline.png)
 
 # Future  Improvements:
 
- the app could be improved by using another NGINX service as an external load balancer for single point of entry to the application.
+ - The app could be improved by using another NGINX service as an external load balancer for single point of entry to the application.
 
 # Updates : 
 
