@@ -83,10 +83,13 @@ A setUp and tearDown function was made to create a test user that would be teste
 
 We then go on to test the GET and POST requests of each relevant function to ensure that the correct data is displayed onto the page with no errors.
 
-All the tests were successful and each test contributed to a percentage of the overall test coverage.
-Tests were automated through Jenkins using webhooks. A Coverage report shows what percentage of statements were included in the tests, this was outputted as HTML files produced on Jenkins. Below is a visualisation of the coverage report.
+All the tests were 100% successful and each test contributed to a percentage of the overall test coverage.
+Tests were automated through Jenkins using webhooks. A Coverage report shows what percentage of statements were included in the tests, this was outputted as HTML files produced on Jenkins. Below is a visualisation of the coverage reports.
 
-![Test Cov Here](filenamehere)
+![Test Coverage Report](figures/frontendCR.png)
+![Test Coverage Report](figures/lottoCR.png)
+![Test Coverage Report](figures/lottoDrawCR.png)
+![Test Coverage Report](figures/prizeCR.png)
 
 # Jenkins: Build Server:
 
